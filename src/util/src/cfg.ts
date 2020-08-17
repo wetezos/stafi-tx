@@ -47,7 +47,7 @@ export class Config {
 
     constructor() {
         const home = os.homedir();
-        const root = path.resolve(home, ".stafi");
+        const root = path.resolve(home, ".stafi2");
         const conf = path.resolve(root, "config.json");
         const types = path.resolve(root, "types.json");
         const addrs = path.resolve(root, "addrs.json");
@@ -120,7 +120,7 @@ export class Config {
             message: "Please input your stafi seed:",
         }, {
             onCancel: () => {
-                log.ex("You can fill the seed field in `~/.stafi/config.json` manually");
+                log.ex("You can fill the seed field in `~/.stafi2/config.json` manually");
             }
         });
 
