@@ -192,8 +192,13 @@ export class API {
     }
 
     public async mintClaim(addr: string, amount: number): Promise<ExResult> {
-        const ex = this._.tx.sudo.sudo(this._.tx.claims.mintClaim(addr, amount));
-        return await this.blockFinalized(ex);
+        try {
+            const ex = this._.tx.sudo.sudo(this._.tx.claims.mintClaim(addr, amount));
+            return await this.blockFinalized(ex);
+        } catch (error) {
+            throw error;
+        }
+        
     }
 
     /**
