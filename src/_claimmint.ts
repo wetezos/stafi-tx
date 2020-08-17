@@ -102,7 +102,6 @@ export default class ClaimMint {
                 } catch (_) {
                     lastPage = 1;
                 }
-                break;
                 await this.sleep(1000 * 2);
             }
 
