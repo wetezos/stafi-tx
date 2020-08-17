@@ -50,7 +50,7 @@ export default class ClaimMint {
         while (1) {
             
             let lastId = 0;
-            let pageSize = 20;
+            let pageSize = 50;
             let lastPage = 2;
 
             let totalCount = 0;
