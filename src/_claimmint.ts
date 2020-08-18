@@ -81,7 +81,7 @@ export default class ClaimMint {
 
                                     totalCount++;
 
-                                    if (element.amount <= 0) {
+                                    if (element.amount <= 0.01) {
                                         continue;
                                     }
                                     map.set(element.source, 1);
@@ -89,7 +89,7 @@ export default class ClaimMint {
                                     totalAmount += amount;
                                     console.log(element.source + ": " + amount);
                                     await this.mint(element.source, amount);
-                                    await this.sleep(2000);
+                                    await this.sleep(6000);
                                 }
                             } else {
                                 lastPage = 1;
