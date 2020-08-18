@@ -50,7 +50,7 @@ export default class ClaimMint {
         while (1) {
             
             let lastId = 0;
-            let pageSize = 50;
+            let pageSize = 100;
             let lastPage = 2;
 
             let totalCount = 0;
@@ -79,17 +79,18 @@ export default class ClaimMint {
                                         continue;
                                     }
 
-                                    totalCount++;
-
                                     if (element.amount <= 0.01) {
                                         continue;
                                     }
+
+                                    totalCount++;
+
                                     map.set(element.source, 1);
                                     let amount = Math.round(element.amount * 100000) / 100000;
                                     totalAmount += amount;
                                     console.log(element.source + ": " + amount);
                                     await this.mint(element.source, amount);
-                                    await this.sleep(6000);
+                                    await this.sleep(1000);
                                 }
                             } else {
                                 lastPage = 1;
@@ -110,7 +111,7 @@ export default class ClaimMint {
 
             preday = day;
 
-            await this.sleep(1000 * 500);
+            await this.sleep(1000 * 600);
         }
     }
 

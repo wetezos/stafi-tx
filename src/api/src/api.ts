@@ -192,13 +192,9 @@ export class API {
     }
 
     public async mintClaim(addr: string, amount: number): Promise<ExResult> {
-        try {
-            const ex = this._.tx.sudo.sudo(this._.tx.claims.mintClaim(addr, amount));
-            return await this.blockFinalized(ex);
-        } catch (error) {
-            throw error;
-        }
-        
+        const ex = this._.tx.sudo.sudo(this._.tx.claims.mintClaim(addr, amount));
+        const nonce = await this._.rpc.system.accountNextIndex(this.account.address);
+        return await this.blockFinalized(ex, nonce);
     }
 
     /**
@@ -209,6 +205,7 @@ export class API {
      */
     private blockFinalized(
         ex: SubmittableExtrinsic<"promise">,
+        nonce?: any,
         inFinialize?: boolean,
     ): Promise<ExResult> {
         const res = new ExResult(
@@ -217,8 +214,13 @@ export class API {
             "", // exHash
         );
 
+        let options = {};
+        if (nonce) {
+            options = { nonce };
+        }
+
         return new Promise((resolve, reject) => {
-            ex.signAndSend(this.account, {}, (sr: SubmittableResult) => {
+            ex.signAndSend(this.account, options, (sr: SubmittableResult) => {
                 const status = sr.status;
                 const events = sr.events;
 
