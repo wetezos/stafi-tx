@@ -70,7 +70,7 @@ export default class ClaimMint {
                             date.setTime(result.data.timestamp * 1000);
                             let h = date.getHours();
     
-                            if (h < 1 || day != preday) {
+                            if (h < 4 || day != preday) {
                                 const list = result.data.list;
                                 for (let index = 0; index < list.length; index++) {
                                     let element = list[index];
