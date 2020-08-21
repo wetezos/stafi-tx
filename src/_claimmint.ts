@@ -88,7 +88,7 @@ export default class ClaimMint {
                                     map.set(element.source, 1);
                                     let amount = Math.round(element.amount * 100000) / 100000;
                                     totalAmount += amount;
-                                    console.log(element.source + ": " + amount);
+                                    console.log(element.source + ": " + amount + ", lastId: " + lastId);
                                     await this.mint(element.source, amount);
                                     await this.sleep(1000);
                                 }
