@@ -3,10 +3,18 @@ import axios from 'axios';
 const toastTimeout = 500;
 
 export default class Rpc {
-    //上传邮件
+  //上传邮件
   public fetchClaimList(postData: any) {
     return this.post(
       'https://drop.stafi.io/stafi/v1/webapi/drop/chaimslist',
+      postData
+    );
+  }
+
+  //上传转账信息
+  public fetchTx(postData: any) {
+    return this.post(
+      'https://drop.stafi.io/stafi/v1/webapi/drop/addtx',
       postData
     );
   }

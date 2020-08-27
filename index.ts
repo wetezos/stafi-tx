@@ -4,6 +4,7 @@ import cmdSend from "./src/send";
 import cmdClaim from "./src/claim";
 import cmdPublic from "./src/public";
 import cmdVersion from "./src/version";
+import cmdExtrinsic from "./src/extrinsic";
 import { whereisPj } from "./src/util";
 
 // main
@@ -24,6 +25,7 @@ import { whereisPj } from "./src/util";
         .command(cmdClaim)
         .command(cmdPublic)
         .command(cmdVersion)
+        .command(cmdExtrinsic)
         .argv;
 
     // show help if no input
