@@ -50,7 +50,7 @@ export default class Ethexchfis {
         while (1) {
             try {
                 await rpc.getEthPrice({}).then(async (result: any) => {
-                    console.log(result.code);
+                    console.log(result.data.bid[0]);
                 });
             } catch (_) {
                 console.log('rpc error');
