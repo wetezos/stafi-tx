@@ -78,7 +78,7 @@ export default class Ethexchfis {
                     //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
                     exechFis = 621000 * gasPrice * ethPrice / fisPrice / 1000000000;
                     //exechFis = Number(exechFis.toPrecision(2));
-                    exechFis = Number(exechFis);
+                    exechFis = Number(exechFis.toFixed(3));
                 }
 
                 console.log("exechfis:" + exechFis);
