@@ -20,9 +20,9 @@ export default class Rpc {
   }
 
   //getEthPrice
-  public getEthPrice(getData: any) {
+  public getPrice(getData: any) {
     return this.get(
-      'https://bitmax.io/api/pro/v1/ticker?symbol=BTMX/USDT',
+      'https://bitmax.io/api/pro/v1/ticker',
       getData
     );
   }
