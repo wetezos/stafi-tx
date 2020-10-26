@@ -20,10 +20,10 @@ export default class Rpc {
   }
 
   //getEthPrice
-  public getPrice(getData: any) {
+  public getPrice(symbol: any) {
     return this.get(
-      'https://bitmax.io/api/pro/v1/ticker',
-      getData
+      'https://bitmax.io/api/pro/v1/ticker?symbol=' + symbol,
+      {}
     );
   }
 
