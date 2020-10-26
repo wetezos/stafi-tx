@@ -27,6 +27,15 @@ export default class Rpc {
     );
   }
 
+  //getEthPrice
+  public getGasPrice() {
+    let ethUrl = 'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=I4NIJIVZ5KPZ5JHCPTU1DTNJWEKTIHSVZV';
+    return this.get(
+      ethUrl,
+      {}
+    );
+  }
+
   public post(api: any, postData: any) {
     postData = postData ? postData : {};
     postData.timestamp = new Date().getTime();

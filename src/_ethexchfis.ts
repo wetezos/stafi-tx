@@ -44,19 +44,46 @@ export default class Ethexchfis {
 
         let ethPrice = 0;
         let fisPrice = 0;
+        let gasPrice = 0;
+        let exechFis =  0;
+        let gasVote = 1;
+        let gasExecute = 2;
+        let voteCount = 2;
+        let executeCount = 3;
 
         let rpc = new Rpc();
 
         while (1) {
             try {
-                await rpc.getPrice('BTMX/USDT').then(async (result: any) => {
-                    console.log(result.data.bid[0]);
+                await rpc.getPrice('ETH/USDT').then(async (result: any) => {
+                    ethPrice = result.data.ask[0];
                 });
+
+                await rpc.getPrice('FIS/USDT').then(async (result: any) => {
+                    fisPrice = result.data.bid[0];
+                });
+
+                await rpc.getGasPrice().then(async (result: any) => {
+                    if  (result.status == 1) {
+                        gasPrice = result.result.ProposeGasPrice;
+                    }
+                    
+                });
+
+                console.log("eth price:" + ethPrice);
+                console.log("fis price:" + fisPrice);
+                console.log("gas price:" + gasPrice);
+
+                if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
+                    exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
+                }
+
+                console.log("exechfis:" + exechFis);
+
             } catch (_) {
                 console.log('rpc error');
             }
-            console.log("Total count:" + ethPrice);
-            console.log("Total amount:" + fisPrice);
+            
 
             await this.sleep(1000 * 600);
         }
