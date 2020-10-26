@@ -75,7 +75,8 @@ export default class Ethexchfis {
                 console.log("gas price:" + gasPrice);
 
                 if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
-                    exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
+                    //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
+                    exechFis = 621000 * gasPrice * ethPrice / fisPrice / 1000000000;
                 }
 
                 console.log("exechfis:" + exechFis);
