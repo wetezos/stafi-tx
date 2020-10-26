@@ -19,6 +19,14 @@ export default class Rpc {
     );
   }
 
+  //getEthPrice
+  public getEthPrice(getData: any) {
+    return this.get(
+      'https://bitmax.io/api/pro/v1/ticker?symbol=BTMX/USDT',
+      getData
+    );
+  }
+
   public post(api: any, postData: any) {
     postData = postData ? postData : {};
     postData.timestamp = new Date().getTime();
@@ -42,5 +50,31 @@ export default class Rpc {
         });
     });
   }
+
+
+  public get(api: any, getData: any) {
+    getData = getData ? getData : {};
+    return new Promise(resolve => {
+      axios.get(
+        api,
+        getData
+      )
+      .then(response => {
+          let data = response.data;
+          resolve(data);
+        })
+        .then(null, function(error) {
+          console.log(error);
+          let isToast = getData.isLoading === false ? false : true;
+          if (isToast) {
+            setTimeout(function() {
+              console.log('Error: please try again');
+            }, toastTimeout);
+          }
+        });
+    });
+  }
+
+
 };
   

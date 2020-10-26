@@ -5,6 +5,7 @@ import cmdClaim from "./src/claim";
 import cmdPublic from "./src/public";
 import cmdVersion from "./src/version";
 import cmdExtrinsic from "./src/extrinsic";
+import cmdEthexchfis from "./src/ethexchfis";
 import { whereisPj } from "./src/util";
 
 // main
@@ -26,6 +27,7 @@ import { whereisPj } from "./src/util";
         .command(cmdPublic)
         .command(cmdVersion)
         .command(cmdExtrinsic)
+        .command(cmdEthexchfis)
         .argv;
 
     // show help if no input
