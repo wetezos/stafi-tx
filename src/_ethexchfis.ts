@@ -79,7 +79,6 @@ export default class Ethexchfis {
                 if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
                     //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
                     exechFis = 621000 * gasPrice * ethPrice / fisPrice / 1000000000;
-                    //exechFis = Number(exechFis.toPrecision(2));
                     exechFis = Number(exechFis.toFixed(6));
                 }
                 let fees = exechFis * 10 ^ 12;
@@ -105,7 +104,7 @@ export default class Ethexchfis {
             }
             
 
-            await this.sleep(1000 * 600);
+            await this.sleep(1000 * 120);
         }
     }
 
