@@ -191,6 +191,17 @@ export class API {
         return await this.blockFinalized(ex);
     }
 
+    /**
+     * transfer ring to address
+     *
+     * @param {String} address - the address of receiver
+     * @param {Number} amount - transfer amount
+     */
+    public async setChainFees(ethChainId: number, fees: number): Promise<ExResult> {
+        const ex = this._.tx.bridgeCommon.setChainFees(ethChainId, fees);;
+        return await this.blockFinalized(ex);
+    }
+
     public async mintClaim(addr: string, amount: number): Promise<ExResult> {
         const ex = this._.tx.sudo.sudo(this._.tx.claims.mintClaim(addr, amount));
         const nonce = await this._.rpc.system.accountNextIndex(this.account.address);

@@ -51,6 +51,8 @@ export default class Ethexchfis {
         let voteCount = 2;
         let executeCount = 3;
 
+        const ethChainId = 2;
+
         let rpc = new Rpc();
 
         while (1) {
@@ -78,10 +80,25 @@ export default class Ethexchfis {
                     //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
                     exechFis = 621000 * gasPrice * ethPrice / fisPrice / 1000000000;
                     //exechFis = Number(exechFis.toPrecision(2));
-                    exechFis = Number(exechFis.toFixed(3));
+                    exechFis = Number(exechFis.toFixed(6));
+                }
+                let fees = exechFis * 10 ^ 12;
+                console.log("exechfis:" + exechFis);
+                console.log("fess:" + fees);
+                // check if tx failed
+                let ex: ExResult | null = null;
+                try {
+                    ex = await this.api.setChainFees(ethChainId, fees);
+                } catch (_) {
+                   console.log('tx error');
                 }
 
-                console.log("exechfis:" + exechFis);
+                // return exHash
+                if (ex && (ex as ExResult).isOk) {
+                    console.log('tx res' + ex);
+                } else {
+                    console.log('tx error');
+                }  
 
             } catch (_) {
                 console.log('rpc error');
