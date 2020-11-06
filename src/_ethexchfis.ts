@@ -81,16 +81,12 @@ export default class Ethexchfis {
                     exechFis = 621000 * gasPrice * ethPrice / fisPrice / 1000000000;
                     exechFis = Number(exechFis.toFixed(6));
                 }
-                let fees = exechFis * 10 ^ 12;
+                let fees = Math.round(exechFis * 1000000000000);
                 console.log("exechfis:" + exechFis);
-                console.log("fess:" + fees);
+                console.log("fees:" + fees);
                 // check if tx failed
                 let ex: ExResult | null = null;
-                try {
-                    ex = await this.api.setChainFees(ethChainId, fees);
-                } catch (_) {
-                   console.log('tx error');
-                }
+                ex = await this.api.setChainFees(ethChainId, fees);
 
                 // return exHash
                 if (ex && (ex as ExResult).isOk) {
