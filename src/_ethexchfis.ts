@@ -57,7 +57,7 @@ export default class Ethexchfis {
 
         while (1) {
             try {
-                await rpc.getPrice('ETH/USDT').then(async (result: any) => {
+                await rpc.getPrice('ethusdt').then(async (result: any) => {
                     if(result.status == 'ok') {
                         ethPrice = result.tick.ask[0];
                     }
