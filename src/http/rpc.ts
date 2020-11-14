@@ -22,7 +22,7 @@ export default class Rpc {
   //getEthPrice
   public getPrice(symbol: any) {
     return this.get(
-      'https://bitmax.io/api/pro/v1/ticker?symbol=' + symbol,
+      'https://api.huobi.pro/market/detail/merged?symbol=' + symbol,
       {}
     );
   }

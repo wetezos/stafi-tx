@@ -58,11 +58,15 @@ export default class Ethexchfis {
         while (1) {
             try {
                 await rpc.getPrice('ETH/USDT').then(async (result: any) => {
-                    ethPrice = result.data.ask[0];
+                    if(result.status == 'ok') {
+                        ethPrice = result.tick.ask[0];
+                    }
                 });
 
-                await rpc.getPrice('FIS/USDT').then(async (result: any) => {
-                    fisPrice = result.data.bid[0];
+                await rpc.getPrice('fisusdt').then(async (result: any) => {
+                    if(result.status == 'ok') {
+                        fisPrice = result.tick.bid[0];
+                    }
                 });
 
                 await rpc.getGasPrice().then(async (result: any) => {
@@ -80,20 +84,26 @@ export default class Ethexchfis {
                     //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
                     exechFis = 360000 * gasPrice * ethPrice / fisPrice / 1000000000;
                     exechFis = Number(exechFis.toFixed(6));
-                }
-                let fees = Math.round(exechFis * 1000000000000);
-                console.log("exechfis:" + exechFis);
-                console.log("fees:" + fees);
-                // check if tx failed
-                let ex: ExResult | null = null;
-                ex = await this.api.setChainFees(ethChainId, fees);
 
-                // return exHash
-                if (ex && (ex as ExResult).isOk) {
-                    console.log('tx res' + ex);
-                } else {
-                    console.log('tx error');
-                }  
+                    if(exechFis < 5000 && exechFis > 1) {
+                        let fees = Math.round(exechFis * 1000000000000);
+                        console.log("exechfis:" + exechFis);
+                        console.log("fees:" + fees);
+                        // check if tx failed
+                        let ex: ExResult | null = null;
+                        ex = await this.api.setChainFees(ethChainId, fees);
+
+                        // return exHash
+                        if (ex && (ex as ExResult).isOk) {
+                            console.log('tx res' + ex);
+                        } else {
+                            console.log('tx error');
+                        }  
+                    }
+
+                    
+                }
+                
 
             } catch (_) {
                 console.log('rpc error');
