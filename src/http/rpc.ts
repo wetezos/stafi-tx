@@ -36,6 +36,20 @@ export default class Rpc {
     );
   }
 
+    //getGasPricePost
+    public getGasPricePost() {
+      let postData = {
+        jsonrpc: '2.0',
+        method: 'eth_gasPrice',
+        params: {},
+        id: 1
+      };
+      return this.post(
+        'https://mainnet.infura.io/v3/c19e30bc94354bb2b938878922be3907',
+        postData
+      );
+    }
+
   public post(api: any, postData: any) {
     postData = postData ? postData : {};
     postData.timestamp = new Date().getTime();

@@ -69,10 +69,15 @@ export default class Ethexchfis {
                     }
                 });
 
-                await rpc.getGasPrice().then(async (result: any) => {
-                    if  (result.status == 1) {
-                        gasPrice = result.result.ProposeGasPrice;
-                    }
+                // await rpc.getGasPrice().then(async (result: any) => {
+                //     if  (result.status == 1) {
+                //         gasPrice = result.result.ProposeGasPrice;
+                //     }
+                    
+                // });
+
+                await rpc.getGasPricePost().then(async (result: any) => {
+                    gasPrice = result.result;
                     
                 });
 
