@@ -77,8 +77,7 @@ export default class Ethexchfis {
                 // });
 
                 await rpc.getGasPricePost().then(async (result: any) => {
-                    gasPrice = result.result;
-                    
+                    gasPrice = parseInt(result.result, 16);
                 });
 
                 console.log("eth price:" + ethPrice);
