@@ -41,7 +41,6 @@ export default class Rpc {
       let postData = {
         jsonrpc: '2.0',
         method: 'eth_gasPrice',
-        params: {},
         id: 1
       };
       return this.post(
