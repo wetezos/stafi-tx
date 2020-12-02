@@ -86,7 +86,7 @@ export default class Ethexchfis {
 
                 if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
                     //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
-                    exechFis = 360000 * gasPrice * ethPrice / fisPrice / 1000000000;
+                    exechFis = 340000 * gasPrice * ethPrice / fisPrice / 1000000000;
                     exechFis = Number(exechFis.toFixed(6));
 
                     if(exechFis < 5000 && exechFis > 1) {
