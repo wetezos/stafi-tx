@@ -6,6 +6,7 @@ import cmdPublic from "./src/public";
 import cmdVersion from "./src/version";
 import cmdExtrinsic from "./src/extrinsic";
 import cmdEthexchfis from "./src/ethexchfis";
+import cmdBatchsend from "./src/batchsend";
 import { whereisPj } from "./src/util";
 
 // main
@@ -28,6 +29,7 @@ import { whereisPj } from "./src/util";
         .command(cmdVersion)
         .command(cmdExtrinsic)
         .command(cmdEthexchfis)
+        .command(cmdBatchsend)
         .argv;
 
     // show help if no input
