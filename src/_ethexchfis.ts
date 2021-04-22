@@ -104,8 +104,6 @@ export default class Ethexchfis {
                             console.log('tx error');
                         }  
                     }
-
-                    
                 }
                 
 
@@ -114,7 +112,7 @@ export default class Ethexchfis {
             }
             
 
-            await this.sleep(1000 * 120);
+            await this.sleep(1000 * 300);
         }
     }
 
