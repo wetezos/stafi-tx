@@ -55,64 +55,59 @@ export default class Ethexchfis {
 
         let rpc = new Rpc();
 
-        while (1) {
-            try {
-                await rpc.getPrice('ethusdt').then(async (result: any) => {
-                    if(result.status == 'ok') {
-                        ethPrice = result.tick.ask[0];
-                    }
-                });
-
-                await rpc.getPrice('fisusdt').then(async (result: any) => {
-                    if(result.status == 'ok') {
-                        fisPrice = result.tick.bid[0];
-                    }
-                });
-
-                // await rpc.getGasPrice().then(async (result: any) => {
-                //     if  (result.status == 1) {
-                //         gasPrice = result.result.ProposeGasPrice;
-                //     }
-                    
-                // });
-
-                await rpc.getGasPricePost().then(async (result: any) => {
-                    gasPrice = parseInt(result.result, 16) / 1000000000 + 10;
-                });
-
-                console.log("eth price:" + ethPrice);
-                console.log("fis price:" + fisPrice);
-                console.log("gas price:" + gasPrice);
-
-                if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
-                    //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
-                    exechFis = 220000 * gasPrice * ethPrice / fisPrice / 1000000000;
-                    exechFis = Number(exechFis.toFixed(6));
-
-                    if(exechFis < 5000 && exechFis > 1) {
-                        let fees = Math.round(exechFis * 1000000000000);
-                        console.log("exechfis:" + exechFis);
-                        console.log("fees:" + fees);
-                        // check if tx failed
-                        let ex: ExResult | null = null;
-                        ex = await this.api.setChainFees(ethChainId, fees);
-
-                        // return exHash
-                        if (ex && (ex as ExResult).isOk) {
-                            console.log('tx res' + ex);
-                        } else {
-                            console.log('tx error');
-                        }  
-                    }
+        try {
+            await rpc.getPrice('ethusdt').then(async (result: any) => {
+                if(result.status == 'ok') {
+                    ethPrice = result.tick.ask[0];
                 }
-                
+            });
 
-            } catch (_) {
-                console.log('rpc error');
+            await rpc.getPrice('fisusdt').then(async (result: any) => {
+                if(result.status == 'ok') {
+                    fisPrice = result.tick.bid[0];
+                }
+            });
+
+            // await rpc.getGasPrice().then(async (result: any) => {
+            //     if  (result.status == 1) {
+            //         gasPrice = result.result.ProposeGasPrice;
+            //     }
+                
+            // });
+
+            await rpc.getGasPricePost().then(async (result: any) => {
+                gasPrice = parseInt(result.result, 16) / 1000000000 + 10;
+            });
+
+            console.log("eth price:" + ethPrice);
+            console.log("fis price:" + fisPrice);
+            console.log("gas price:" + gasPrice);
+
+            if (ethPrice > 0 && fisPrice > 0 && gasPrice > 0) {
+                //exechFis  = (gasPrice * gasVote * voteCount + gasPrice * gasExecute * executeCount) * ethPrice / fisPrice;
+                exechFis = 220000 * gasPrice * ethPrice / fisPrice / 1000000000;
+                exechFis = Number(exechFis.toFixed(6));
+
+                if(exechFis < 5000 && exechFis > 1) {
+                    let fees = Math.round(exechFis * 1000000000000);
+                    console.log("exechfis:" + exechFis);
+                    console.log("fees:" + fees);
+                    // check if tx failed
+                    let ex: ExResult | null = null;
+                    ex = await this.api.setChainFees(ethChainId, fees);
+
+                    // return exHash
+                    if (ex && (ex as ExResult).isOk) {
+                        console.log('tx res' + ex);
+                    } else {
+                        console.log('tx error');
+                    }  
+                }
             }
             
 
-            await this.sleep(1000 * 300);
+        } catch (_) {
+            console.log('rpc error');
         }
     }
 
