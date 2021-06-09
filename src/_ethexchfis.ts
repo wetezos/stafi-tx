@@ -109,6 +109,10 @@ export default class Ethexchfis {
         } catch (_) {
             console.log('rpc error');
         }
+        
+        console.log('end');
+        await this.sleep(1000*30);
+        process.exit();
     }
 
 
